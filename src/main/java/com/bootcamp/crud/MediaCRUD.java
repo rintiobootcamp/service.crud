@@ -3,13 +3,19 @@ package com.bootcamp.crud;
 
 import com.bootcamp.commons.constants.DatabaseConstants;
 import com.bootcamp.commons.exceptions.DatabaseException;
+import com.bootcamp.commons.models.Criteria;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Media;
 import com.bootcamp.repositories.MediaRepository;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import javax.persistence.Query;
 
 /**
  *
@@ -61,5 +67,32 @@ public class MediaCRUD implements DatabaseConstants{
     public static List<Media> read() throws SQLException {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.findAll();
+    }
+    
+    public static List<Media> getByCriteria(List<Criteria> criterias) {
+        String q = "select b from Media b where";
+        HashMap<String, Object> hmap = new HashMap<String, Object>();
+
+        for (Criteria criteria : criterias) {
+            q+= " b." + criteria.getRule().getColumn() + " " + criteria.getRule().getOperator() + " :" + criteria.getRule().getColumn();
+            if (criteria.getLinkOperator()!=null){
+                q+=" "+criteria.getLinkOperator();
+            }
+            hmap.put(criteria.getRule().getColumn(), criteria.getRule().getValue());
+        }
+
+        MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
+
+        Query query = mediaRepository.getEm().createQuery(q);
+
+        Set set = hmap.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry) iterator.next();
+            query.setParameter((String) mentry.getKey(), mentry.getValue());
+        }
+        
+        List<Media> result = query.getResultList();
+        return result;
     }
 }
