@@ -44,32 +44,32 @@ public class CommentaireCRUD implements DatabaseConstants {
         return CommentaireRepository.getDataByCriteria(criterias);
     }
 
-    public static List<Commentaire> getByCriteria(List<Criteria> criterias) {
-        String q = "select b from Commentaire b where";
-        HashMap<String, Object> hmap = new HashMap<String, Object>();
-
-        for (Criteria criteria : criterias) {
-            q+= " b." + criteria.getRule().getColumn() + " " + criteria.getRule().getOperator() + " :" + criteria.getRule().getColumn();
-            if (criteria.getLinkOperator()!=null){
-                q+=" "+criteria.getLinkOperator();
-            }
-            hmap.put(criteria.getRule().getColumn(), criteria.getRule().getValue());
-        }
-
-        CommentaireRepository commentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
-
-        Query query = commentaireRepository.getEm().createQuery(q);
-
-        Set set = hmap.entrySet();
-        Iterator iterator = set.iterator();
-        while (iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry) iterator.next();
-            query.setParameter((String) mentry.getKey(), mentry.getValue());
-        }
-        
-        List<Commentaire> result = query.getResultList();
-        return result;
-    }
+//    public static List<Commentaire> getByCriteria(List<Criteria> criterias) {
+//        String q = "select b from Commentaire b where";
+//        HashMap<String, Object> hmap = new HashMap<String, Object>();
+//
+//        for (Criteria criteria : criterias) {
+//            q+= " b." + criteria.getRule().getColumn() + " " + criteria.getRule().getOperator() + " :" + criteria.getRule().getColumn();
+//            if (criteria.getLinkOperator()!=null){
+//                q+=" "+criteria.getLinkOperator();
+//            }
+//            hmap.put(criteria.getRule().getColumn(), criteria.getRule().getValue());
+//        }
+//
+//        CommentaireRepository commentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
+//
+//        Query query = commentaireRepository.getEm().createQuery(q);
+//
+//        Set set = hmap.entrySet();
+//        Iterator iterator = set.iterator();
+//        while (iterator.hasNext()) {
+//            Map.Entry mentry = (Map.Entry) iterator.next();
+//            query.setParameter((String) mentry.getKey(), mentry.getValue());
+//        }
+//        
+//        List<Commentaire> result = query.getResultList();
+//        return result;
+//    }
 
     public static List<Commentaire> read(Criterias criterias, int page, int size) {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
