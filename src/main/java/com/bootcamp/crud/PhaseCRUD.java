@@ -1,7 +1,7 @@
-
 package com.bootcamp.crud;
 
 import com.bootcamp.commons.constants.DatabaseConstants;
+import static com.bootcamp.commons.constants.DatabaseConstants.PERSISTENCE_UNIT;
 import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Phase;
@@ -15,51 +15,128 @@ import java.util.List;
  *
  * @author Bignon
  */
-public class PhaseCRUD implements DatabaseConstants{
-    public static boolean create(Phase Phase) throws SQLException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.create(Phase);
+public class PhaseCRUD implements DatabaseConstants {
+
+    /* Crud for phase */
+    /**
+     * Insert the phase in the database
+     *
+     * @param phase
+     * @return
+     * @throws SQLException
+     */
+    public static boolean create(Phase phase) throws SQLException {
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.create(phase);
     }
 
-    public static boolean update(Phase Phase) throws SQLException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.update(Phase);
+    /**
+     * Update the phase in the database
+     *
+     * @param phase
+     * @return
+     * @throws SQLException
+     */
+    public static boolean update(Phase phase) throws SQLException {
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.update(phase);
     }
 
-
-    public static boolean delete(Phase Phase) throws SQLException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return  PhaseRepository.delete(Phase);
+    /**
+     * Delete the phase in the database
+     *
+     * @param phase
+     * @return
+     * @throws SQLException
+     */
+    public static boolean delete(Phase phase) throws SQLException {
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.delete(phase);
 
     }
 
+    /**
+     * Get all the phases in the database matching the given criteria list
+     *
+     * @param criterias
+     * @return phases
+     */
     public static List<Phase> read(Criterias criterias) {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.getDataByCriteria(criterias);
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.getDataByCriteria(criterias);
     }
 
+    /**
+     * Get all the phases in the database matching the given criteria list,
+     * page, size
+     *
+     * @param criterias
+     * @param page
+     * @param size
+     * @return phases
+     */
     public static List<Phase> read(Criterias criterias, int page, int size) {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.getDataByCriteria(criterias, page, size);
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.getDataByCriteria(criterias, page, size);
     }
 
+    /**
+     * Get the given fields of all the phases in the database matching the given
+     * criteria list, page, size
+     *
+     * @param criterias
+     * @param page
+     * @param size
+     * @param fields
+     * @return phases
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     */
     public static List<Phase> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.getDataByCriteria(criterias, fields, page, size);
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.getDataByCriteria(criterias, fields, page, size);
     }
 
+    /**
+     * Get the given fields of all the phases in the database matching the given
+     * criteria list
+     *
+     * @param criterias
+     * @param fields
+     * @return phases
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     */
     public static List<Phase> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.getDataByCriteria(criterias, fields);
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.getDataByCriteria(criterias, fields);
     }
 
+    /**
+     * Get the given fields of all the phases in the database
+     *
+     * @param fields
+     * @return phases
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     * @throws SQLException
+     */
     public static List<Phase> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.getDataByCriteria(fields);
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.getDataByCriteria(fields);
     }
 
+    /**
+     * Get all the phases in the database
+     *
+     * @return phases
+     * @throws SQLException
+     */
     public static List<Phase> read() throws SQLException {
-        PhaseRepository PhaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
-        return PhaseRepository.findAll();
+        PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
+        return phaseRepository.findAll();
     }
 }
