@@ -1,6 +1,7 @@
 package com.bootcamp.crud;
 
 import com.bootcamp.commons.constants.DatabaseConstants;
+import static com.bootcamp.commons.constants.DatabaseConstants.PERSISTENCE_UNIT;
 import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Objectif;
@@ -12,55 +13,130 @@ import java.util.List;
 
 /**
  *
- * @author Moh
+ * @author Bignon
  */
 public class ObjectifCRUD implements DatabaseConstants {
 
+    /* Crud for objectif */
+    /**
+     * Insert the objectif in the database
+     *
+     * @param objectif
+     * @return
+     * @throws SQLException
+     */
     public static boolean create(Objectif objectif) throws SQLException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.create(objectif);
     }
 
+    /**
+     * Update the objectif in the database
+     *
+     * @param objectif
+     * @return
+     * @throws SQLException
+     */
     public static boolean update(Objectif objectif) throws SQLException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.update(objectif);
     }
 
-
+    /**
+     * Delete the objectif in the database
+     *
+     * @param objectif
+     * @return
+     * @throws SQLException
+     */
     public static boolean delete(Objectif objectif) throws SQLException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
-        return  objectifRepository.delete(objectif);
+        return objectifRepository.delete(objectif);
 
     }
 
+    /**
+     * Get all the objectifs in the database matching the given criteria list
+     *
+     * @param criterias
+     * @return objectifs
+     */
     public static List<Objectif> read(Criterias criterias) {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias);
     }
 
+    /**
+     * Get all the objectifs in the database matching the given criteria list,
+     * page, size
+     *
+     * @param criterias
+     * @param page
+     * @param size
+     * @return objectifs
+     */
     public static List<Objectif> read(Criterias criterias, int page, int size) {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, page, size);
     }
 
+    /**
+     * Get the given fields of all the objectifs in the database matching the
+     * given criteria list, page, size
+     *
+     * @param criterias
+     * @param page
+     * @param size
+     * @param fields
+     * @return objectifs
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     */
     public static List<Objectif> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, fields, page, size);
     }
 
+    /**
+     * Get the given fields of all the objectifs in the database matching the
+     * given criteria list
+     *
+     * @param criterias
+     * @param fields
+     * @return objectifs
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     */
     public static List<Objectif> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, fields);
     }
 
+    /**
+     * Get the given fields of all the objectifs in the database
+     *
+     * @param fields
+     * @return objectifs
+     * @throws IllegalAccessException
+     * @throws DatabaseException
+     * @throws InvocationTargetException
+     * @throws SQLException
+     */
     public static List<Objectif> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(fields);
     }
 
+    /**
+     * Get all the objectifs in the database
+     *
+     * @return objectifs
+     * @throws SQLException
+     */
     public static List<Objectif> read() throws SQLException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.findAll();
     }
-
 }
