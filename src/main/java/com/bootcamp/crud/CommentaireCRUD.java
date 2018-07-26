@@ -5,6 +5,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Commentaire;
 import com.bootcamp.repositories.CommentaireRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class CommentaireCRUD implements DatabaseConstants {
 
     /* Crud for Commentaire */
@@ -60,6 +62,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      * @param criterias
      * @return comments
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read(Criterias criterias) {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.getDataByCriteria(criterias);
@@ -74,6 +77,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      * @param size
      * @return comments
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read(Criterias criterias, int page, int size) {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.getDataByCriteria(criterias, page, size);
@@ -92,6 +96,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.getDataByCriteria(criterias, fields, page, size);
@@ -108,6 +113,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.getDataByCriteria(criterias, fields);
@@ -123,6 +129,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.getDataByCriteria(fields);
@@ -133,6 +140,7 @@ public class CommentaireCRUD implements DatabaseConstants {
      *
      * @return @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Commentaire> read() throws SQLException {
         CommentaireRepository CommentaireRepository = new CommentaireRepository(PERSISTENCE_UNIT);
         return CommentaireRepository.findAll();

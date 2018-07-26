@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Note;
 import com.bootcamp.repositories.NoteRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class NoteCRUD implements DatabaseConstants {
 
     /* Crud for note */
@@ -61,6 +63,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @param criterias
      * @return notes
      */
+    @Transactional(readOnly = true)
     public static List<Note> read(Criterias criterias) {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @param size
      * @return notes
      */
+    @Transactional(readOnly = true)
     public static List<Note> read(Criterias criterias, int page, int size) {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Note> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Note> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Note> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class NoteCRUD implements DatabaseConstants {
      * @return notes
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Note> read() throws SQLException {
         NoteRepository noteRepository = new NoteRepository(PERSISTENCE_UNIT);
         return noteRepository.findAll();

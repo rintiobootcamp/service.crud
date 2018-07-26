@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Region;
 import com.bootcamp.repositories.RegionRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class RegionCRUD implements DatabaseConstants {
 
     /* Crud for region */
@@ -61,6 +63,7 @@ public class RegionCRUD implements DatabaseConstants {
      * @param criterias
      * @return regions
      */
+    @Transactional(readOnly = true)
     public static List<Region> read(Criterias criterias) {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class RegionCRUD implements DatabaseConstants {
      * @param size
      * @return regions
      */
+    @Transactional(readOnly = true)
     public static List<Region> read(Criterias criterias, int page, int size) {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class RegionCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Region> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,21 +114,22 @@ public class RegionCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Region> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.getDataByCriteria(criterias, fields);
     }
 
     /**
-     * Get the given fields of all the regions in the database
      *
      * @param fields
-     * @return regions
+     * @return
+     * @throws SQLException
      * @throws IllegalAccessException
      * @throws DatabaseException
      * @throws InvocationTargetException
-     * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Region> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.getDataByCriteria(fields);
@@ -135,6 +141,7 @@ public class RegionCRUD implements DatabaseConstants {
      * @return regions
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Region> read() throws SQLException {
         RegionRepository regionRepository = new RegionRepository(PERSISTENCE_UNIT);
         return regionRepository.findAll();

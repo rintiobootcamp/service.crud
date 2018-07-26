@@ -7,6 +7,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.UserRole;
 import com.bootcamp.repositories.UserRoleRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -14,8 +15,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class UserRoleCRUD implements DatabaseConstants{
 
     public static boolean create(UserRole userRole) throws SQLException {
@@ -35,31 +37,37 @@ public class UserRoleCRUD implements DatabaseConstants{
 
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read(Criterias criterias) {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.getDataByCriteria(criterias);
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read(Criterias criterias, int page, int size) {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.getDataByCriteria(criterias, page, size);
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.getDataByCriteria(criterias, fields, page, size);
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.getDataByCriteria(criterias, fields);
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.getDataByCriteria(fields);
     }
 
+    @Transactional(readOnly = true)
     public static List<UserRole> read() throws SQLException {
         UserRoleRepository userRoleRepository = new UserRoleRepository(PERSISTENCE_UNIT);
         return userRoleRepository.findAll();

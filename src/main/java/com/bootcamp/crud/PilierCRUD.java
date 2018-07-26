@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Pilier;
 import com.bootcamp.repositories.PilierRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class PilierCRUD implements DatabaseConstants {
 
     /* Crud for pilier */
@@ -61,6 +63,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @param criterias
      * @return piliers
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read(Criterias criterias) {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @param size
      * @return piliers
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read(Criterias criterias, int page, int size) {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class PilierCRUD implements DatabaseConstants {
      * @return piliers
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Pilier> read() throws SQLException {
         PilierRepository pilierRepository = new PilierRepository(PERSISTENCE_UNIT);
         return pilierRepository.findAll();

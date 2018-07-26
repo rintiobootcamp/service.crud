@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Phase;
 import com.bootcamp.repositories.PhaseRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class PhaseCRUD implements DatabaseConstants {
 
     /* Crud for phase */
@@ -61,6 +63,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @param criterias
      * @return phases
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read(Criterias criterias) {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @param size
      * @return phases
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read(Criterias criterias, int page, int size) {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class PhaseCRUD implements DatabaseConstants {
      * @return phases
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Phase> read() throws SQLException {
         PhaseRepository phaseRepository = new PhaseRepository(PERSISTENCE_UNIT);
         return phaseRepository.findAll();

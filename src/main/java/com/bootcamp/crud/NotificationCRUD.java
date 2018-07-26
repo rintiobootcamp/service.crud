@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Notification;
 import com.bootcamp.repositories.NotificationRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class NotificationCRUD implements DatabaseConstants {
 
     /* Crud for notification */
@@ -62,6 +64,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @param criterias
      * @return notifications
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read(Criterias criterias) {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.getDataByCriteria(criterias);
@@ -76,6 +79,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @param size
      * @return notifications
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read(Criterias criterias, int page, int size) {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.getDataByCriteria(criterias, page, size);
@@ -94,6 +98,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.getDataByCriteria(criterias, fields, page, size);
@@ -110,6 +115,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.getDataByCriteria(criterias, fields);
@@ -125,6 +131,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.getDataByCriteria(fields);
@@ -136,6 +143,7 @@ public class NotificationCRUD implements DatabaseConstants {
      * @return notifications
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Notification> read() throws SQLException {
         NotificationRepository notificationRepository = new NotificationRepository(PERSISTENCE_UNIT);
         return notificationRepository.findAll();

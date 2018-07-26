@@ -5,6 +5,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Impact;
 import com.bootcamp.repositories.ImpactRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author Moh
  */
+@Transactional
 public class ImpactCRUD implements DatabaseConstants {
 
     /**
@@ -59,6 +61,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @param criterias
      * @return impacts
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read(Criterias criterias) {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.getDataByCriteria(criterias);
@@ -73,6 +76,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @param size
      * @return impacts
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read(Criterias criterias, int page, int size) {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.getDataByCriteria(criterias, page, size);
@@ -91,6 +95,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.getDataByCriteria(criterias, fields, page, size);
@@ -107,6 +112,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.getDataByCriteria(criterias, fields);
@@ -122,6 +128,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.getDataByCriteria(fields);
@@ -133,6 +140,7 @@ public class ImpactCRUD implements DatabaseConstants {
      * @return impacts
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Impact> read() throws SQLException {
         ImpactRepository ImpactRepository = new ImpactRepository(PERSISTENCE_UNIT);
         return ImpactRepository.findAll();

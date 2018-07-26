@@ -5,6 +5,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Axe;
 import com.bootcamp.repositories.AxeRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class AxeCRUD implements DatabaseConstants {
 
     /* Crud for axe */
@@ -60,6 +62,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @param criterias
      * @return axes
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read(Criterias criterias) {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.getDataByCriteria(criterias);
@@ -74,6 +77,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @param size
      * @return axes
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read(Criterias criterias, int page, int size) {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.getDataByCriteria(criterias, page, size);
@@ -92,6 +96,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.getDataByCriteria(criterias, fields, page, size);
@@ -108,6 +113,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.getDataByCriteria(criterias, fields);
@@ -123,6 +129,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.getDataByCriteria(fields);
@@ -134,6 +141,7 @@ public class AxeCRUD implements DatabaseConstants {
      * @return axes
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Axe> read() throws SQLException {
         AxeRepository axeRepository = new AxeRepository(PERSISTENCE_UNIT);
         return axeRepository.findAll();

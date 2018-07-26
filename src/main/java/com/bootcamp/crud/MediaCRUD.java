@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Media;
 import com.bootcamp.repositories.MediaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class MediaCRUD implements DatabaseConstants {
 
     /* Crud for media */
@@ -61,6 +63,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @param criterias
      * @return medias
      */
+    @Transactional(readOnly = true)
     public static List<Media> read(Criterias criterias) {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @param size
      * @return medias
      */
+    @Transactional(readOnly = true)
     public static List<Media> read(Criterias criterias, int page, int size) {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Media> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Media> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Media> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class MediaCRUD implements DatabaseConstants {
      * @return medias
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Media> read() throws SQLException {
         MediaRepository mediaRepository = new MediaRepository(PERSISTENCE_UNIT);
         return mediaRepository.findAll();

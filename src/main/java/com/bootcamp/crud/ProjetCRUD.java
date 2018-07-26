@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Projet;
 import com.bootcamp.repositories.ProjetRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class ProjetCRUD implements DatabaseConstants {
 
     /* Crud for projet */
@@ -61,6 +63,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @param criterias
      * @return projets
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read(Criterias criterias) {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @param size
      * @return projets
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read(Criterias criterias, int page, int size) {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class ProjetCRUD implements DatabaseConstants {
      * @return projets
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Projet> read() throws SQLException {
         ProjetRepository projetRepository = new ProjetRepository(PERSISTENCE_UNIT);
         return projetRepository.findAll();

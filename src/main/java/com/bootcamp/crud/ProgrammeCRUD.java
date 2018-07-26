@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Programme;
 import com.bootcamp.repositories.ProgrammeRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class ProgrammeCRUD implements DatabaseConstants {
 
     /* Crud for programme */
@@ -61,6 +63,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @param criterias
      * @return programmes
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read(Criterias criterias) {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @param size
      * @return programmes
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read(Criterias criterias, int page, int size) {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class ProgrammeCRUD implements DatabaseConstants {
      * @return programmes
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Programme> read() throws SQLException {
         ProgrammeRepository programmeRepository = new ProgrammeRepository(PERSISTENCE_UNIT);
         return programmeRepository.findAll();

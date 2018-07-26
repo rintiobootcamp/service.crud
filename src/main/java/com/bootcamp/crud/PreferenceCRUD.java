@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Preference;
 import com.bootcamp.repositories.PreferenceRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class PreferenceCRUD implements DatabaseConstants {
 
     /* Crud for preference */
@@ -61,6 +63,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @param criterias
      * @return preferences
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read(Criterias criterias) {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @param size
      * @return preferences
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read(Criterias criterias, int page, int size) {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class PreferenceCRUD implements DatabaseConstants {
      * @return preferences
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Preference> read() throws SQLException {
         PreferenceRepository preferenceRepository = new PreferenceRepository(PERSISTENCE_UNIT);
         return preferenceRepository.findAll();

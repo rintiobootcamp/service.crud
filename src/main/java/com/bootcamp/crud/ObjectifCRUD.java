@@ -6,6 +6,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.Objectif;
 import com.bootcamp.repositories.ObjectifRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -13,8 +14,9 @@ import java.util.List;
 
 /**
  *
- * @author Bignon
+ * @author rintio
  */
+@Transactional
 public class ObjectifCRUD implements DatabaseConstants {
 
     /* Crud for objectif */
@@ -61,6 +63,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @param criterias
      * @return objectifs
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read(Criterias criterias) {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias);
@@ -75,6 +78,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @param size
      * @return objectifs
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read(Criterias criterias, int page, int size) {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, page, size);
@@ -93,6 +97,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, fields, page, size);
@@ -109,6 +114,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(criterias, fields);
@@ -124,6 +130,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @throws InvocationTargetException
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.getDataByCriteria(fields);
@@ -135,6 +142,7 @@ public class ObjectifCRUD implements DatabaseConstants {
      * @return objectifs
      * @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<Objectif> read() throws SQLException {
         ObjectifRepository objectifRepository = new ObjectifRepository(PERSISTENCE_UNIT);
         return objectifRepository.findAll();

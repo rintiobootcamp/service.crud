@@ -5,6 +5,7 @@ import com.bootcamp.commons.exceptions.DatabaseException;
 import com.bootcamp.commons.models.Criterias;
 import com.bootcamp.entities.LikeTable;
 import com.bootcamp.repositories.LikeTableRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author Bignon
  */
+@Transactional
 public class LikeTableCRUD implements DatabaseConstants {
 
     /* Crud for likeTable */
@@ -60,6 +62,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      * @param criterias
      * @return likes
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read(Criterias criterias) {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.getDataByCriteria(criterias);
@@ -74,6 +77,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      * @param size
      * @return likes
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read(Criterias criterias, int page, int size) {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.getDataByCriteria(criterias, page, size);
@@ -92,6 +96,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read(Criterias criterias, List<String> fields, int page, int size) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.getDataByCriteria(criterias, fields, page, size);
@@ -108,6 +113,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read(Criterias criterias, List<String> fields) throws IllegalAccessException, DatabaseException, InvocationTargetException {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.getDataByCriteria(criterias, fields);
@@ -123,6 +129,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      * @throws DatabaseException
      * @throws InvocationTargetException
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read(List<String> fields) throws SQLException, IllegalAccessException, DatabaseException, InvocationTargetException {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.getDataByCriteria(fields);
@@ -133,6 +140,7 @@ public class LikeTableCRUD implements DatabaseConstants {
      *
      * @return @throws SQLException
      */
+    @Transactional(readOnly = true)
     public static List<LikeTable> read() throws SQLException {
         LikeTableRepository likeTableRepository = new LikeTableRepository(PERSISTENCE_UNIT);
         return likeTableRepository.findAll();
