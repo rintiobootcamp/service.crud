@@ -44,6 +44,13 @@ public class QuestionCRUD implements DatabaseConstants {
         return questionRepository.update(question);
     }
 
+    public static boolean updateUne(Question question) throws SQLException {
+        QuestionRepository questionRepository = new QuestionRepository(PERSISTENCE_UNIT);
+        questionRepository.getEm().createQuery("UPDATE QUESTION q SET q.UNE:=fals");
+        return true;
+
+    }
+
     /**
      * Delete the question in the database
      *
@@ -147,4 +154,6 @@ public class QuestionCRUD implements DatabaseConstants {
         QuestionRepository questionRepository = new QuestionRepository(PERSISTENCE_UNIT);
         return questionRepository.findAll();
     }
+
+
 }
