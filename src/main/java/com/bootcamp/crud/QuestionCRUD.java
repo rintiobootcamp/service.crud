@@ -46,7 +46,7 @@ public class QuestionCRUD implements DatabaseConstants {
 
     public static boolean updateUne() throws SQLException {
         QuestionRepository questionRepository = new QuestionRepository(PERSISTENCE_UNIT);
-        questionRepository.getEm().createQuery("UPDATE Question q  SET q.une=false");
+        questionRepository.getEm().createQuery("UPDATE Question q  SET q.une = 0");
         return true;
 
     }
